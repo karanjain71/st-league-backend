@@ -8,11 +8,11 @@
 		<version>3.0.4</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.projects</groupId>
-	<artifactId>stock-league</artifactId>
+	<groupId>com.stocks</groupId>
+	<artifactId>stock-league-api</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>stock-league</name>
-	<description>Demo project for Spring Boot</description>
+	<name>stock-league-api</name>
+	<description>Stock League API</description>
 	<properties>
 		<java.version>17</java.version>
 	</properties>

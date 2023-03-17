@@ -1,10 +1,10 @@
-package com.projects.stockleague;
+package com.stocks.stockleagueapi;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class StockLeagueApplicationTests {
+class StockLeagueApiApplicationTests {
 
 	@Test
 	void contextLoads() {
