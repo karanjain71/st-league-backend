@@ -19,20 +19,20 @@ public class StockDetails {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public int id;
 	
-	public String companyName;
-	public double marketCap;
-	public String nseCode;
-	public double todayOpen;
-	public double todayHigh;
-	public double todayLow;
-	public double todayClose;
+	public String CompanyName;
+	public double MarketCap;
+	public String NSECode;
+	public double TodayOpen;
+	public double TodayHigh;
+	public double TodayLow;
+	public double TodayClose;
 	public double ltp;
 	public double dayChange;
 	public double dayChangePerc;
 	public long volume;
 	public long totalBuyQty;
 	public long totalSellQty;
-	public double yrHigh;
-	public double yrLow;
+	public double YrHigh;
+	public double YrLow;
 	
 }
