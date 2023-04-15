@@ -19,6 +19,6 @@ public class StockDetailsController {
 	public void getAllStocks() {
 		System.out.println("coming here");
 //		stockDetailsRepository.findByNseCode("RELIANCE");
-		stockDetailsService.getAllStockDetails();
+		//stockDetailsService.getAllStockDetails();
 	}
 }
