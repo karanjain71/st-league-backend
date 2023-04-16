@@ -32,23 +32,24 @@ public class AuthController {
 	@Autowired
 	private AuthenticationManager authenticationManager;
 	
-	@PostMapping("/register")
-	public ResponseEntity<JwtAuthResponse> registerUser(@RequestBody JwtAuthRequest request) throws Exception{
-		
-		System.out.println(request.getUsername() + " " + request.getPassword());
-//		request.setPassword(request.getPassword())
-		Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(
-                request.getUsername(),
-                request.getPassword()));
-        SecurityContextHolder.getContext().setAuthentication(authentication);
-		String token = this.jwtTokenHelper.generateToken(authentication);
-
-		JwtAuthResponse response = new JwtAuthResponse();
-		response.setToken(token);
-		
-		return new ResponseEntity<>(response, HttpStatus.OK);
-	}
+//	@PostMapping("/register")
+//	public ResponseEntity<JwtAuthResponse> registerUser(@RequestBody JwtAuthRequest request) throws Exception{
+//		
+//		System.out.println(request.getUsername() + " " + request.getPassword());
+////		request.setPassword(request.getPassword())
+//		Authentication authentication = authenticationManager.authenticate(
+//                new UsernamePasswordAuthenticationToken(
+//                request.getUsername(),
+//                request.getPassword()));
+//        SecurityContextHolder.getContext().setAuthentication(authentication);
+//		
+//        String token = this.jwtTokenHelper.generateToken(authentication);
+//
+//		JwtAuthResponse response = new JwtAuthResponse();
+//		response.setToken(token);
+//		
+//		return new ResponseEntity<>(response, HttpStatus.OK);
+//	}
 	
 	@PostMapping("/login")
 	public ResponseEntity<JwtAuthResponse> createToken(@RequestBody JwtAuthRequest request) throws Exception{
@@ -63,7 +64,7 @@ public class AuthController {
 		
 		UserDetails userDetails = this.userDetailsService.loadUserByUsername(request.getUsername());
 		
-		String token = this.jwtTokenHelper.generateToken(authentication);
+		String token = this.jwtTokenHelper.generateToken(userDetails);
 		
 		JwtAuthResponse response = new JwtAuthResponse();
 		response.setToken(token);
