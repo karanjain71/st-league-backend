@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -33,7 +34,7 @@ public class SecurityConfigs {
         http
         .csrf().disable()
         .authorizeHttpRequests()
-        .antMatchers("/api/vi/auth/login").permitAll()
+        .antMatchers("/api/v1/auth/**").permitAll()
         .anyRequest().authenticated()
         .and()
         .exceptionHandling().authenticationEntryPoint(this.jwtAuthenticationEntryPoint)
@@ -46,19 +47,24 @@ public class SecurityConfigs {
         return http.build();
     }
 	
-	@Bean
-	protected void configure(AuthenticationManagerBuilder auth) throws Exception{
-		auth.userDetailsService(this.customUserDetailService).passwordEncoder(passwordEncoder());
-	}
+//	@Bean
+//	protected void configure(AuthenticationManagerBuilder auth) throws Exception{
+//		auth.userDetailsService(this.customUserDetailService).passwordEncoder(passwordEncoder());
+//	}
 	
 	@Bean
 	public PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
 	
+//	@Bean
+//	public AuthenticationManager authenticationManagerBean() throws Exception{
+//		return authenticationManagerBean();
+//	}
 	@Bean
-	public AuthenticationManager authenticationManagerBean() throws Exception{
-		return authenticationManagerBean();
-	}
+    public AuthenticationManager authenticationManager(
+            AuthenticationConfiguration authenticationConfiguration) throws Exception {
+        return authenticationConfiguration.getAuthenticationManager();
+    }
 	
 }
