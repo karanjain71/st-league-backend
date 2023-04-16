@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
@@ -43,10 +44,24 @@ public class JwtTokenHelper {
 		return expiration.before(new Date());
 	}
 	
-	public String generateToken(UserDetails userDetails) {
-		Map<String, Object> claims = new HashMap<>();
-		return doGenerateToken(claims, userDetails.getUsername());
-	}
+//	public String generateToken(UserDetails userDetails) {
+//		Map<String, Object> claims = new HashMap<>();
+//		return doGenerateToken(claims, userDetails.getUsername());
+//	}
+	public String generateToken(Authentication authentication) {
+    	System.out.println("This is the authentication " + authentication.toString());
+        String username = authentication.getName();
+        Date currentDate = new Date();
+        Date expireDate = new Date(currentDate.getTime() + JWT_TOKEN_VALIDITY);
+
+        String token = Jwts.builder()
+                .setSubject(username)
+                .setIssuedAt(new Date())
+                .setExpiration(expireDate)
+                .signWith(SignatureAlgorithm.HS512, secret)
+                .compact();
+        return token;
+    }
 	
 	/**
 	   while creating the token
