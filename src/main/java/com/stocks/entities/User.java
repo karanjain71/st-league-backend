@@ -1,5 +1,6 @@
 package com.stocks.entities;
 
+import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashSet;
@@ -33,7 +34,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name="users")
+@Table(name="user")
 public class User implements UserDetails{
 	
 	@Id
@@ -48,6 +49,12 @@ public class User implements UserDetails{
 	
 	@Column(name="password", nullable = false)
 	private String password;
+	
+	@Column(name="password_reset_token")
+	private String passwordResetToken;
+	
+	@Column(name="token_creation_date")
+	private LocalDateTime tokenCreationDate;
 	
 	@Column(name="referral_code", nullable = false)
 	private String referralCode;

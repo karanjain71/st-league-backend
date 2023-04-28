@@ -1,12 +1,17 @@
 package com.stocks.repositories;
 
-import java.util.Optional;
-
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.stocks.entities.User;
 
 public interface UserRepository extends JpaRepository<User, Integer> {
 
-	Optional<User> findByEmail(String email);
+	User findByEmail(String email);
+    User findByUserNameOrEmail(String username, String email);
+    User findByUserName(String username);
+    Boolean existsByUserName(String username);
+    Boolean existsByEmail(String email);
+    User findByPasswordResetToken(String token);
+	
+	
 }
