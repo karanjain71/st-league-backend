@@ -26,7 +26,7 @@ public class StockLeagueApiApplication implements CommandLineRunner{
 	@Override
 	public void run(String... args) throws Exception {
 		
-		System.out.println("yo"+this.passwordEncoder.encode("aditi"));
+		System.out.println("yo : "+this.passwordEncoder.encode("aditi"));
 	}
 	
 	

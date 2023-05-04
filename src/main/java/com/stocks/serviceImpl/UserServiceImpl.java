@@ -7,6 +7,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.stocks.entities.User;
@@ -17,6 +18,8 @@ import com.stocks.services.UserService;
 public class UserServiceImpl implements UserService{
 
 	private static final long EXPIRE_TOKEN_AFTER_MINUTES = 30;
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 	
 	@Autowired
 	private UserRepository userRepository;
@@ -42,7 +45,7 @@ public class UserServiceImpl implements UserService{
 		Optional<User> userOptional = Optional.ofNullable(userRepository.findByEmail(email));
 
 		if (!userOptional.isPresent()) {
-			return "Invalid email id!";
+			return "Invalid email id";
 		}
 
 		User user = userOptional.get();
@@ -59,19 +62,19 @@ public class UserServiceImpl implements UserService{
 		Optional<User> userOptional = Optional.ofNullable(userRepository.findByPasswordResetToken(token));
 
 		if (!userOptional.isPresent()) {
-			return "Invalid token!";
+			return "Invalid token";
 		}
 
 		LocalDateTime tokenCreationDate = userOptional.get().getTokenCreationDate();
 
 		if (isTokenExpired(tokenCreationDate)) {
-			return "Token expired!";
+			return "Token expired";
 
 		}
 
 		User user = userOptional.get();
 
-		user.setPassword(password);
+		user.setPassword(passwordEncoder.encode(password));
 		user.setPasswordResetToken(null);
 		user.setTokenCreationDate(null);
 

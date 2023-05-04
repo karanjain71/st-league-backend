@@ -2,6 +2,7 @@ package com.stocks.controllers;
 
 import java.util.Collections;
 
+import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -54,7 +55,9 @@ public class AuthController {
 		
 		this.authenticate(request.getUsername(), request.getPassword());
 		
-		UserDetails userDetails = this.userDetailsService.loadUserByUsername(request.getUsername());
+		System.out.println("Username is : "+request.getUsername());
+		
+		UserDetails userDetails = userDetailsService.loadUserByUsername(request.getUsername());
 		
 		String token = this.jwtTokenHelper.generateToken(userDetails);
 		
@@ -99,6 +102,8 @@ public class AuthController {
         user.setDateOfBirth(signUp.getDateOfBirth());
         user.setPhoneNumber(signUp.getPhoneNumber());
         user.setGender(signUp.getGender());
+        user.setBalance((long) 0);
+        user.setReferralCode(RandomStringUtils.randomAlphanumeric(8).toUpperCase());
 
         Role roles = roleRepository.findByName("ADMIN").get();
         user.setRoles(Collections.singleton(roles));
@@ -115,7 +120,7 @@ public class AuthController {
 		String response = userService.forgotPassword(email);
 
 		if (!response.startsWith("Invalid")) {
-			response = "http://localhost:8080/reset-password?token=" + response;
+			response = "http://localhost:8080/api/v1/auth/reset-password?token=" + response;
 		}
 		return response;
 	}
