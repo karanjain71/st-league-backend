@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.stocks.entities.User;
 
@@ -12,6 +13,7 @@ import com.stocks.entities.User;
 public interface UserService {
 
 	List<User>getAllUsers();
+	User getUserDetails(@RequestParam String userEmail);
 	User addUser(@RequestBody User user);
 	User updateUser(@RequestBody User user, String userEmail);
 	String forgotPassword(String email);

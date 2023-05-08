@@ -1,5 +1,7 @@
 package com.stocks.entities;
 
+import java.time.LocalDateTime;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -21,25 +23,25 @@ public class StockDetails {
 	public int id;
 	
 	@Column(name="company_name", nullable = false)
-	public String CompanyName;
+	public String companyName;
 	
 	@Column(name="market_cap", nullable = false)
-	public double MarketCap;
+	public double marketCap;
 	
 	@Column(name="nse_code", nullable = false)
-	public String NSECode;
+	public String nseCode;
 	
 	@Column(name="today_open", nullable = false)
-	public double TodayOpen;
+	public double todayOpen;
 	
 	@Column(name="today_high", nullable = false)
-	public double TodayHigh;
+	public double todayHigh;
 	
 	@Column(name="today_low", nullable = false)
-	public double TodayLow;
+	public double todayLow;
 	
 	@Column(name="today_close", nullable = false)
-	public double TodayClose;
+	public double todayClose;
 	
 	@Column(name="ltp", nullable = false)
 	public double ltp;
@@ -60,9 +62,9 @@ public class StockDetails {
 	public long totalSellQty;
 	
 	@Column(name="yr_high", nullable = false)
-	public double YrHigh;
+	public double yrHigh;
 	
 	@Column(name="yr_low", nullable = false)
-	public double YrLow;
+	public double yrLow;
 	
 }
