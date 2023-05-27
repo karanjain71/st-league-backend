@@ -86,8 +86,9 @@ public class StockDetailsServiceImpl implements StockDetailsService{
 		}
 		catch(Exception ex) {
 			ex.printStackTrace();
+			System.out.println("Api failed here!!");
+			return null;
 		}
-		return null;
 	}
 	
 	@Override
@@ -108,9 +109,9 @@ public class StockDetailsServiceImpl implements StockDetailsService{
 		}
 		catch(Exception ex) {
 			ex.printStackTrace();
+			System.out.println("Api failed here!!");
+			return null;
 		}
-		return null;
-		
 	}
 	
 	@Override
@@ -131,8 +132,9 @@ public class StockDetailsServiceImpl implements StockDetailsService{
 		}
 		catch(Exception ex) {
 			ex.printStackTrace();
+			System.out.println("Api failed here!!");
+			return null;
 		}
-		return null;
 	}
 
 	@Override
