@@ -23,25 +23,25 @@ public class StockDetails {
 	public int id;
 	
 	@Column(name="company_name", nullable = false)
-	public String companyName;
+	public String CompanyName;
 	
 	@Column(name="market_cap", nullable = false)
-	public double marketCap;
+	public double MarketCap;
 	
 	@Column(name="nse_code", nullable = false)
-	public String nseCode;
+	public String NSECode;
 	
 	@Column(name="today_open", nullable = false)
-	public double todayOpen;
+	public double TodayOpen;
 	
 	@Column(name="today_high", nullable = false)
-	public double todayHigh;
+	public double TodayHigh;
 	
 	@Column(name="today_low", nullable = false)
-	public double todayLow;
+	public double TodayLow;
 	
 	@Column(name="today_close", nullable = false)
-	public double todayClose;
+	public double TodayClose;
 	
 	@Column(name="ltp", nullable = false)
 	public double ltp;
@@ -62,9 +62,9 @@ public class StockDetails {
 	public long totalSellQty;
 	
 	@Column(name="yr_high", nullable = false)
-	public double yrHigh;
+	public double YrHigh;
 	
 	@Column(name="yr_low", nullable = false)
-	public double yrLow;
+	public double YrLow;
 	
 }

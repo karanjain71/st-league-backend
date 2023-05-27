@@ -17,6 +17,6 @@ public interface StockDetailsRepository extends JpaRepository<StockDetails, Inte
 	@Query(value = "Select * from stock_details where nsecode = :nsecode", nativeQuery = true)
 	Optional<StockDetails> findByNseCode(@Param("nsecode") String nsecode);
 	
-	@Query(value = "SELECT s from stock_details s WHERE s.nseCode = :nseCode ", nativeQuery = true)
+	@Query(value = "SELECT s from stock_details s WHERE s.nseCode = :nseCode", nativeQuery = true)
 	StockDetails getStockDetailLatest(@Param("nseCode") String nseCode);
 }

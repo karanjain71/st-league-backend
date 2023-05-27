@@ -50,10 +50,10 @@ public class StockDetailsServiceImpl implements StockDetailsService{
             
             
             for(StockDetails st: obj.getData()) {
-            	StockDetails stockCheck = stockDetailsRepository.findByNseCode(st.getNseCode()).orElse(new StockDetails());
-            	if(stockCheck.getNseCode()!="") {
+            	StockDetails stockCheck = stockDetailsRepository.findByNseCode(st.getNSECode()).orElse(new StockDetails());
+            	if(stockCheck.getNSECode()!="") {
             		System.out.println("company already present in the db. just update stock");
-            		updateStockDetails(st.getNseCode(), st);
+            		updateStockDetails(st.getNSECode(), st);
             		
             	}
             	else {        
@@ -87,8 +87,8 @@ public class StockDetailsServiceImpl implements StockDetailsService{
 		catch(Exception ex) {
 			ex.printStackTrace();
 			System.out.println("Api failed here!!");
-			return null;
 		}
+		return null;
 	}
 	
 	@Override
@@ -109,9 +109,9 @@ public class StockDetailsServiceImpl implements StockDetailsService{
 		}
 		catch(Exception ex) {
 			ex.printStackTrace();
-			System.out.println("Api failed here!!");
-			return null;
 		}
+		return null;
+		
 	}
 	
 	@Override
@@ -132,9 +132,8 @@ public class StockDetailsServiceImpl implements StockDetailsService{
 		}
 		catch(Exception ex) {
 			ex.printStackTrace();
-			System.out.println("Api failed here!!");
-			return null;
 		}
+		return null;
 	}
 
 	@Override
@@ -151,8 +150,8 @@ public class StockDetailsServiceImpl implements StockDetailsService{
 	
 	@Override
 	public StockDetails updateStockDetails(String nsecode, StockDetails st) {
-		StockDetails updatedStock = stockDetailsRepository.findByNseCode(st.getNseCode()).orElse(new StockDetails());
-		if(updatedStock.getNseCode()!="") {
+		StockDetails updatedStock = stockDetailsRepository.findByNseCode(st.getNSECode()).orElse(new StockDetails());
+		if(updatedStock.getNSECode()!="") {
     		System.out.println("company already present in the db. just update stock");
     		updatedStock.setCompanyName(st.getCompanyName());
     		updatedStock.setMarketCap(st.getMarketCap());
