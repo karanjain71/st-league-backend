@@ -4,6 +4,7 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse.BodyHandlers;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 
@@ -28,6 +29,12 @@ public class StockDetailsServiceImpl implements StockDetailsService{
 	
 	@Override
 	public List<StockDetails> getAllStockDetails() {
+		return stockDetailsRepository.findAll();
+	}
+	
+	
+	@Override
+	public void updateStockDbCron() {
 		
 		try {
 			HttpClient client = HttpClient.newHttpClient();
@@ -58,13 +65,81 @@ public class StockDetailsServiceImpl implements StockDetailsService{
 		catch(Exception ex) {
 			ex.printStackTrace();
 		}
+		
+	}
+	
+	@Override
+	public AllStocksApiResponse getTopGainers(){
+		try {
+			HttpClient client = HttpClient.newHttpClient();
+			HttpRequest request = HttpRequest.newBuilder()
+					  .uri(new URI(StockDetailsConstants.STOCK_API_URL + "/api/v1/topgainers?token=" + StockDetailsConstants.STOCK_API_KEY))
+					  .GET()
+					  .build();
+			
+			var response = client.send(request,BodyHandlers.ofString());
+			System.out.println("Api succeeded here!!");
+			
+            AllStocksApiResponse obj = new Gson().fromJson(response.body(), AllStocksApiResponse.class);
+            return obj;
+            		
+		}
+		catch(Exception ex) {
+			ex.printStackTrace();
+			System.out.println("Api failed here!!");
+		}
+		return null;
+	}
+	
+	@Override
+	public AllStocksApiResponse getTopLosers(){
+		try {
+			HttpClient client = HttpClient.newHttpClient();
+			HttpRequest request = HttpRequest.newBuilder()
+					  .uri(new URI(StockDetailsConstants.STOCK_API_URL + "/api/v1/toplosers?token=" + StockDetailsConstants.STOCK_API_KEY))
+					  .GET()
+					  .build();
+			
+			var response = client.send(request,BodyHandlers.ofString());
+			System.out.println("Api succeeded here!!");
+			
+            AllStocksApiResponse obj = new Gson().fromJson(response.body(), AllStocksApiResponse.class);
+            return obj;
+            			
+		}
+		catch(Exception ex) {
+			ex.printStackTrace();
+		}
+		return null;
+		
+	}
+	
+	@Override
+	public AllStocksApiResponse getTopStocksByVolume(){
+		try {
+			HttpClient client = HttpClient.newHttpClient();
+			HttpRequest request = HttpRequest.newBuilder()
+					  .uri(new URI(StockDetailsConstants.STOCK_API_URL + "/api/v1/topvolume?token=" + StockDetailsConstants.STOCK_API_KEY))
+					  .GET()
+					  .build();
+			
+			var response = client.send(request,BodyHandlers.ofString());
+			System.out.println("Api succeeded here!!");
+			
+            AllStocksApiResponse obj = new Gson().fromJson(response.body(), AllStocksApiResponse.class);
+            return obj;
+            			
+		}
+		catch(Exception ex) {
+			ex.printStackTrace();
+		}
 		return null;
 	}
 
 	@Override
 	public StockDetails getStockDetailsByNseCode(String nsecode) {
-		// TODO Auto-generated method stub
-		return null;
+		StockDetails stockInfo = stockDetailsRepository.getStockDetailLatest(nsecode);
+		return stockInfo;
 	}
 	
 	@Override
@@ -94,6 +169,6 @@ public class StockDetailsServiceImpl implements StockDetailsService{
     	}
 		return updatedStock;
 	}
-	
+
 	
 }

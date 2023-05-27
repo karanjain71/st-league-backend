@@ -1,16 +1,19 @@
 package com.stocks;
 
-import javax.print.attribute.standard.Destination;
-
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.context.properties.PropertyMapper.Source;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @SpringBootApplication
-public class StockLeagueApiApplication {
+public class StockLeagueApiApplication implements CommandLineRunner{
 
+	@Autowired
+	private PasswordEncoder passwordEncoder;
+	
 	public static void main(String[] args) {
 		SpringApplication.run(StockLeagueApiApplication.class, args);
 		System.out.println("Hello1");
@@ -20,5 +23,12 @@ public class StockLeagueApiApplication {
 		ModelMapper modelMapper = new ModelMapper();
 		return modelMapper;
 	}
+	@Override
+	public void run(String... args) throws Exception {
+		
+		System.out.println("yo : "+this.passwordEncoder.encode("aditi"));
+	}
+	
+	
 
 }
