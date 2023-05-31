@@ -11,6 +11,7 @@ import java.util.Map;
 import javax.transaction.Transactional;
 
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -149,25 +150,11 @@ public class StockDetailsServiceImpl implements StockDetailsService{
 	}
 	
 	@Override
-	public StockDetails updateStockDetails(String nsecode, StockDetails st) {
-		StockDetails updatedStock = stockDetailsRepository.findByNseCode(st.getNSECode()).orElse(new StockDetails());
-		if(updatedStock.getNSECode()!="") {
-    		System.out.println("company already present in the db. just update stock");
-    		updatedStock.setCompanyName(st.getCompanyName());
-    		updatedStock.setMarketCap(st.getMarketCap());
-    		updatedStock.setTodayClose(st.getTodayClose());
-    		updatedStock.setTodayHigh(st.getTodayHigh());
-    		updatedStock.setTodayLow(st.getTodayLow());
-    		updatedStock.setTodayOpen(st.getTodayOpen());
-    		updatedStock.setLtp(st.getLtp());
-    		updatedStock.setDayChange(st.getDayChange());
-    		updatedStock.setDayChangePerc(st.getDayChangePerc());
-    		updatedStock.setVolume(st.getVolume());
-    		updatedStock.setYrHigh(st.getYrHigh());
-    		updatedStock.setYrLow(st.getYrLow());
-    		addStockDetails(updatedStock);	
-    	}
-		return updatedStock;
+	public StockDetails updateStockDetails(String nsecode, StockDetails updatedStock) {
+		StockDetails oldStock = stockDetailsRepository.findByNseCode(nsecode).orElse(new StockDetails());
+		BeanUtils.copyProperties(updatedStock, oldStock, nsecode);
+			
+		return stockDetailsRepository.save(oldStock);
 	}
 
 	

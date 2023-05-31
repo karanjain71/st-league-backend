@@ -65,8 +65,11 @@ public class User implements UserDetails{
 	@Column(name="phone_num", nullable = false)
 	private String phoneNumber;
 	
-	@Column(name="gender", nullable = false)
+	@Column(name="gender")
 	private String gender;
+	
+	@Column(name="photo")
+	private String photo;
 	
 	@Column(name="date_of_birth", nullable = false)
 	private Date dateOfBirth;
