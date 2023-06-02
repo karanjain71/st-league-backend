@@ -9,9 +9,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.stocks.entities.StockDetails;
+import com.stocks.db1.entities.StockDetails;
+import com.stocks.db1.repositories.StockDetailsRepository;
 import com.stocks.payloads.AllStocksApiResponse;
-import com.stocks.repositories.StockDetailsRepository;
 import com.stocks.services.StockDetailsService;
 
 @RestController

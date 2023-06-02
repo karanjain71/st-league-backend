@@ -1,10 +1,10 @@
-package com.stocks.repositories;
+package com.stocks.db1.repositories;
 
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.stocks.entities.User;
+import com.stocks.db1.entities.User;
 
 public interface UserRepository extends JpaRepository<User, Integer> {
 

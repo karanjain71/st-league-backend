@@ -1,15 +1,16 @@
-package com.stocks.repositories;
+package com.stocks.db2.repositories;
 
 import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.repository.query.Param;
 
-import com.stocks.entities.StockTicker;
+import com.stocks.db2.entities.StockTicker;
 
-public interface StockTickerRepository extends JpaRepository<StockTicker, Long>{
+public interface StockTickerRepository extends MongoRepository<StockTicker, Long>{
 
 	@Query(value = "SELECT t from stock_ticker t WHERE t.companyCode = :companyCode AND DATE(t.date) = :date ", nativeQuery = true)
 	List<StockTicker> oneDayDataList(@Param("date") LocalDate date, @Param("companyCode") String companyCode);

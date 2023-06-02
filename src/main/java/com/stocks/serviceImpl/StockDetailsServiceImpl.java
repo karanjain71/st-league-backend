@@ -17,9 +17,9 @@ import org.springframework.stereotype.Service;
 
 import com.google.gson.Gson;
 import com.stocks.configs.StockDetailsConstants;
-import com.stocks.entities.StockDetails;
+import com.stocks.db1.entities.StockDetails;
+import com.stocks.db1.repositories.StockDetailsRepository;
 import com.stocks.payloads.AllStocksApiResponse;
-import com.stocks.repositories.StockDetailsRepository;
 import com.stocks.services.StockDetailsService;
 
 @Service

@@ -19,13 +19,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.stocks.entities.Role;
-import com.stocks.entities.User;
+import com.stocks.db1.entities.Role;
+import com.stocks.db1.entities.User;
+import com.stocks.db1.repositories.RoleRepository;
+import com.stocks.db1.repositories.UserRepository;
 import com.stocks.payloads.JwtAuthRequest;
 import com.stocks.payloads.JwtAuthResponse;
 import com.stocks.payloads.SignUp;
-import com.stocks.repositories.RoleRepository;
-import com.stocks.repositories.UserRepository;
 import com.stocks.security.JwtTokenHelper;
 import com.stocks.services.UserService;
 

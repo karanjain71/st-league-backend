@@ -1,4 +1,4 @@
-package com.stocks.repositories;
+package com.stocks.db1.repositories;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -9,7 +9,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import com.stocks.entities.StockDetails;
+import com.stocks.db1.entities.StockDetails;
 
 @Repository
 public interface StockDetailsRepository extends JpaRepository<StockDetails, Integer> {

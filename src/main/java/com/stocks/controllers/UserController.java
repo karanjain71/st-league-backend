@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.stocks.entities.User;
+import com.stocks.db1.entities.User;
 import com.stocks.services.UserService;
 
 @RestController

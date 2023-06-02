@@ -10,8 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.stocks.entities.User;
-import com.stocks.repositories.UserRepository;
+import com.stocks.db1.entities.User;
+import com.stocks.db1.repositories.UserRepository;
 import com.stocks.services.UserService;
 
 @Service

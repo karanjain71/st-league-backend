@@ -1,6 +1,6 @@
 package com.stocks.services;
 
-import com.stocks.entities.EmailDetails;
+import com.stocks.db1.entities.EmailDetails;
 
 public interface EmailService {
 

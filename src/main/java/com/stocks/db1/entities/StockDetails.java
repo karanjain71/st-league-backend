@@ -1,4 +1,4 @@
-package com.stocks.entities;
+package com.stocks.db1.entities;
 
 import java.time.LocalDateTime;
 

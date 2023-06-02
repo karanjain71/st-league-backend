@@ -22,21 +22,23 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableTransactionManagement
 @EnableJpaRepositories(
     basePackages = "com.stocks.db1.repositories", 
-    entityManagerFactoryRef = "entityManagerFactory"
+    entityManagerFactoryRef = "entityManagerFactory1",
+    transactionManagerRef = "transactionManager1"
+
 )
 public class Db1Config {
 
 	@Primary
-    @Bean(name = "dataSource")
+    @Bean(name = "dataSource1")
 	@ConfigurationProperties(prefix = "spring.db1.datasource")
     public DataSource dataSource() {
         return DataSourceBuilder.create().build();
     }
 	
 	@Primary
-    @Bean(name = "entityManagerFactory")
+    @Bean(name = "entityManagerFactory1")
 	public LocalContainerEntityManagerFactoryBean entityManagerFactory(EntityManagerFactoryBuilder builder,
-			@Qualifier("dataSource") DataSource dataSource) {
+			@Qualifier("dataSource1") DataSource dataSource) {
         HashMap<String, Object>properties = new HashMap<>();
         properties.put("hibernate.hbm2ddl.auto", "update");
 
@@ -48,9 +50,8 @@ public class Db1Config {
     }
 	
 	@Primary
-    @Bean(name = "transactionManager")
-    public PlatformTransactionManager transactionManager(@Qualifier("entityManagerFactory") EntityManagerFactory entityManagerFactory) {
- 
+    @Bean(name = "transactionManager1")
+    public PlatformTransactionManager transactionManager(@Qualifier("entityManagerFactory1") EntityManagerFactory entityManagerFactory) {
         return new JpaTransactionManager(entityManagerFactory);
         
     }

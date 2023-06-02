@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.stocks.entities.StockTicker;
-import com.stocks.repositories.StockTickerRepository;
+import com.stocks.db2.entities.StockTicker;
+import com.stocks.db2.repositories.StockTickerRepository;
 
 @RestController
 @RequestMapping("/api/v1/stockTicker")

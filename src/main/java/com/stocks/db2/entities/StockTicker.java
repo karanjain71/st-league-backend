@@ -1,4 +1,4 @@
-package com.stocks.entities;
+package com.stocks.db2.entities;
 
 import java.time.LocalDateTime;
 
@@ -9,13 +9,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import lombok.Getter;
 import lombok.Setter;
 
-@Entity
-@Table(name="stock_ticker")
-@Setter
+@Document(collection = "stock_ticker")
 @Getter
+@Setter
 public class StockTicker {
 
 	@Id

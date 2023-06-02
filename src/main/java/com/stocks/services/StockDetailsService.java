@@ -3,7 +3,7 @@ package com.stocks.services;
 import java.time.LocalDate;
 import java.util.List;
 
-import com.stocks.entities.StockDetails;
+import com.stocks.db1.entities.StockDetails;
 import com.stocks.payloads.AllStocksApiResponse;
 
 public interface StockDetailsService {
