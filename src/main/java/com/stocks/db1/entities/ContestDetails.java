@@ -1,6 +1,8 @@
 package com.stocks.db1.entities;
 
 import java.time.LocalDateTime;
+import java.util.Map;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -49,5 +51,9 @@ public class ContestDetails {
 	
 	@Column(name="type", nullable = false)
 	String conType;
+	
+	Map<String, Long>winnerPrize;
+	
+	Set<User>contestUsers;
 	
 }

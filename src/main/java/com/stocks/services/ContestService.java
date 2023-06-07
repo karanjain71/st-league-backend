@@ -13,9 +13,12 @@ public interface ContestService {
 	void getContestDetails(String contestCode);
 	void updateContestDetails(ContestDetails contest);
 	void cancelContest(ContestDetails contest);
-	List<User> getParticipants(String contestCode);
+	//List<User> getParticipants(String contestCode);
 	List<User> updateLeaderboard(String contestCode);
 	List<User> getWinners(String contestCode);
+	void getAllContests();
+	void myContests();
+	
 	
 	
 }

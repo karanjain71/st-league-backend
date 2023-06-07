@@ -27,7 +27,7 @@ public class ContestServiceImpl implements ContestService{
 
 	@Override
 	public void joinContest(User user, String contestCode) {
-		
+	
 		
 	}
 
@@ -50,12 +50,6 @@ public class ContestServiceImpl implements ContestService{
 	}
 
 	@Override
-	public List<User> getParticipants(String contestCode) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public List<User> updateLeaderboard(String contestCode) {
 		// TODO Auto-generated method stub
 		return null;
@@ -65,6 +59,18 @@ public class ContestServiceImpl implements ContestService{
 	public List<User> getWinners(String contestCode) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public void getAllContests() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void myContests() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
