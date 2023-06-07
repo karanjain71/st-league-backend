@@ -39,7 +39,7 @@ public class User implements UserDetails{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	private Long id;
 	
 	@Column(name="user_name", nullable = false)
 	private String userName;
@@ -73,6 +73,9 @@ public class User implements UserDetails{
 	
 	@Column(name="date_of_birth", nullable = false)
 	private Date dateOfBirth;
+	
+	@ManyToMany(mappedBy = "contestUsers")
+	private Set<ContestDetails> userContests;
 	
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user", referencedColumnName = "id"),

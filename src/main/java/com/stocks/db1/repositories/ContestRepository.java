@@ -6,4 +6,5 @@ import com.stocks.db1.entities.ContestDetails;
 
 public interface ContestRepository extends JpaRepository<ContestDetails, Long>{
 
+	ContestDetails findByConCode(String conCode);
 }

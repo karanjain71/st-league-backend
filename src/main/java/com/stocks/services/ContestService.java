@@ -7,11 +7,10 @@ import com.stocks.db1.entities.User;
 
 public interface ContestService {
 
-	void createContestPublic(ContestDetails contest);
-	void createContestPrivate(ContestDetails contest);
-	void joinContest(User user, String contestCode);
+	void createContest(ContestDetails contest);
+	void joinContest(User user, ContestDetails contestCode);
 	void getContestDetails(String contestCode);
-	void updateContestDetails(ContestDetails contest);
+	ContestDetails updateContestDetails(ContestDetails contest);
 	void cancelContest(ContestDetails contest);
 	//List<User> getParticipants(String contestCode);
 	List<User> updateLeaderboard(String contestCode);

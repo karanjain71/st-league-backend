@@ -4,11 +4,17 @@ import java.time.LocalDateTime;
 import java.util.Map;
 import java.util.Set;
 
+import javax.persistence.CollectionTable;
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.MapKeyColumn;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -52,8 +58,18 @@ public class ContestDetails {
 	@Column(name="type", nullable = false)
 	String conType;
 	
-	Map<String, Long>winnerPrize;
+	@ElementCollection
+	@CollectionTable(name = "winning_prize_map", joinColumns = {@JoinColumn(name = "contest_id", referencedColumnName = "id")})
+	@MapKeyColumn(name = "range")
+	@Column(name = "amount")
+	Map<String, Long>winningPrize;
 	
+	@ManyToMany
+	@JoinTable(
+	        name = "contest_users",
+	        joinColumns = @JoinColumn(name = "contest_id"),
+	        inverseJoinColumns = @JoinColumn(name = "user_id")
+	    )
 	Set<User>contestUsers;
 	
 }
