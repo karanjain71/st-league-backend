@@ -62,7 +62,7 @@ public class ContestDetails {
 	@CollectionTable(name = "winning_prize_map", joinColumns = {@JoinColumn(name = "contest_id", referencedColumnName = "id")})
 	@MapKeyColumn(name = "range")
 	@Column(name = "amount")
-	Map<String, Long>winningPrize;
+	Map<Integer, Integer>winningPrize;
 	
 	@ManyToMany
 	@JoinTable(
