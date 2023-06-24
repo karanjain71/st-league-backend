@@ -15,6 +15,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.MapKeyColumn;
+import javax.persistence.OneToMany;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -71,5 +72,8 @@ public class ContestDetails {
 	        inverseJoinColumns = @JoinColumn(name = "user_id")
 	    )
 	Set<User>contestUsers;
+	
+	@OneToMany(mappedBy = "contestId")
+    Set<PointsTable> pointsTables;
 	
 }

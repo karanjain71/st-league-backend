@@ -14,7 +14,7 @@ public interface ContestService {
 	ContestDetails updateContestDetails(ContestDetails contest);
 	ContestDetails cancelContest(ContestDetails contest);
 	List<Object[]> getLeaderboard(String contestCode);
-	List<User> setWinners(ContestDetails contestCode);
+	List<Object[]> setWinners(ContestDetails contestCode);
 	List<ContestDetails> getAllContests();
 	Set<ContestDetails> myContests(User user);
 	//void addUpdateWinnningPrizeMap();

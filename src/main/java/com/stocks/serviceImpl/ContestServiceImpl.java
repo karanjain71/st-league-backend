@@ -1,7 +1,6 @@
 package com.stocks.serviceImpl;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
@@ -10,7 +9,6 @@ import java.util.Set;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import com.stocks.db1.entities.ContestDetails;
@@ -75,9 +73,9 @@ public class ContestServiceImpl implements ContestService{
 		return pointsTableRepository.getLeaderboard(contestCode);
 	}
 
-	int lowerBound(List<Integer>L, int ls, int x) {
+	int lowerBound(List<Integer>L, int x, int si, int ei) {
 		
-		int start = 0 , end = ls-1;
+		int start = si , end = ei;
 		
 		while(start <= end) {
 			int mid = start + (end-start+1)/2;
@@ -93,9 +91,9 @@ public class ContestServiceImpl implements ContestService{
 		return start;
 	}
 	
-	int upperBound(List<Object[]>L, int ls, Double x) {
+	int upperBound(List<Object[]>L, Double x, int si, int ei) {
 		
-		int start = 0 , end = ls-1;
+		int start = si , end = ei;
 		
 		while(start < end) {
 			int mid = start + (end - start)/2;
@@ -113,49 +111,71 @@ public class ContestServiceImpl implements ContestService{
 	}
 	
 	@Override
-	public LinkedList<User> setWinners(ContestDetails contest) {
+	public List<Object[]> setWinners(ContestDetails contest) {
+		List<Object[]> resList = new ArrayList<>();
+		
 		Map<Integer, Integer> winningAmt = contest.getWinningPrize();
 		List<Integer> ranks = new ArrayList<>(winningAmt.keySet());
 		int rankSize = ranks.size();
 		
-		List<Object[]> leaderboard = pointsTableRepository.getLeaderboard(contest.getConCode());
+		List<Object[]> lBoard = pointsTableRepository.getLeaderboard(contest.getConCode());
 		
-		int strtRank = 1, endRank = 0;
-		int i,j,ls=leaderboard.size();
+		int strtLBoardIndx = 0, endLBoardIndx = 0, strtRankIndx = 0;
+		int i,j,ls=lBoard.size();
 		for(i = 0; i < ls; i++) {
-			Object[] obj = leaderboard.get(i);
-			Long user_id =  (Long)obj[0];
-			Double points = (Double)obj[1];
+			Object[] obj = lBoard.get(i);
+			//Long user_id =  (Long)obj[0];
+			double points = (double)obj[1];
 			
 			// get the length of repeated values
-			int uInd = upperBound(leaderboard,ls,points);
-			Object[] indObj = leaderboard.get(uInd);
-			Double indPoints = (Double) indObj[1];
+			int uInd = upperBound(lBoard, points, strtLBoardIndx, ls-1);
+			Object[] indObj = lBoard.get(uInd);
+			double indPoints = (double) indObj[1];
 			if(indPoints == points) {
 				uInd++;
 			}
 
 			int replength = uInd - i;
-			endRank = strtRank + replength -1;
+			endLBoardIndx = uInd - 1;
 			
-			// find the lower or upper bound of the end rank
+			// find the lower bound of the start rank and end rank
 			
-			int strtInd = lowerBound(ranks, rankSize, strtRank);
-			int endInd = lowerBound(ranks, rankSize, endRank);
-			int s, sum = 0, cnt=0, strtWith = strtRank;
-			for(s = strtInd+1; s<=endInd; s++) {
-				cnt = s - strtWith;
-				sum += (ranks.get(s) - ranks.get(strtWith)) * cnt;
-				strtWith = ranks.get(s);
+			int strtInd = lowerBound(ranks, strtLBoardIndx+1, strtRankIndx, rankSize-1);
+			int endInd = lowerBound(ranks, endLBoardIndx+1, strtRankIndx, rankSize-1);
+			strtRankIndx = endInd;
+			
+			int r = strtInd+1 , sum = 0, cnt=0, strtWith = strtLBoardIndx+1;
+			for(r = strtInd+1; r <= endInd; r++) {
+				cnt = ranks.get(r)  - strtWith;
+				sum += winningAmt.get(ranks.get(r-1)) * cnt;
+				strtWith = ranks.get(r);
 			}
-			cnt = endRank - ranks.get(s) + 1;
-			sum+= winningAmt.get(s) * cnt;
+			r--;
+			if(strtInd == endInd) {
+				cnt = replength;
+			}
+			else {
+				cnt = endLBoardIndx + 1 - ranks.get(r) + 1;
+			}
+			sum+= winningAmt.get(ranks.get(r)) * cnt;
 			
-			strtRank = endRank + 1;
+			double sharedAmt = (double)sum/replength;
+			
+			for(int res=strtLBoardIndx; res<=endLBoardIndx; res++) {
+				Object[] objArr = new Object[3];
+				objArr[0]=lBoard.get(res)[0]; //userId
+				objArr[1]=lBoard.get(res)[1]; //points
+				objArr[2]=sharedAmt; //winning amount
+				
+				resList.add(objArr);
+			}
+			
+			strtLBoardIndx = endLBoardIndx + 1;
+			i = endLBoardIndx;
 			
 		}
 		
-		return null;
+		return resList;
 	}
 
 	@Override
