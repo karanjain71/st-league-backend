@@ -22,6 +22,9 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+import com.mongodb.client.MongoClient;
+import com.mongodb.client.MongoClients;
+
 @Configuration
 @EnableTransactionManagement
 @EnableJpaRepositories(
@@ -64,7 +67,7 @@ public class Db2Config {
           = new DriverManagerDataSource();
 //        dataSource.setDriverClassName(
 //          env.getProperty("jdbc.driverClassName"));
-        dataSource.setUrl(env.getProperty("spring.db2.datasource.url"));
+        dataSource.setUrl(env.getProperty("spring.db2.datasource.uri"));
 //        dataSource.setUsername(env.getProperty("spring.db1.datasource.username"));
 //        dataSource.setPassword(env.getProperty("spring.db1.datasource.password"));
 
@@ -82,6 +85,9 @@ public class Db2Config {
         return transactionManager;
     }
 
+    public @Bean MongoClient mongoClient() {
+        return MongoClients.create("mongodb://localhost:27017");
+    }
 //	@Primary
 //    @Bean(name = "dataSource2")
 //	@ConfigurationProperties(prefix = "spring.db2.datasource")
