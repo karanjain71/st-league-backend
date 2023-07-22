@@ -20,10 +20,9 @@ import lombok.Setter;
 public class StockTicker {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	public Long id;
+	public String id;
 	
-	@Column(name="date", nullable = false)
+	@Column(name="date")
 	public LocalDateTime date;
 	
 	@Column(name="company_name", nullable = false)
