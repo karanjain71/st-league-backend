@@ -4,7 +4,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.stocks.db1.entities.ContestDetails;
 
-public interface ContestRepository extends JpaRepository<ContestDetails, Long>{
+public interface ContestRepository extends JpaRepository<ContestDetails, Integer>{
 
 	ContestDetails findByConCode(String conCode);
 }

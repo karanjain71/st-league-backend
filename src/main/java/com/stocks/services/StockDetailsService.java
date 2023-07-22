@@ -1,6 +1,5 @@
 package com.stocks.services;
 
-import java.time.LocalDate;
 import java.util.List;
 
 import com.stocks.db1.entities.StockDetails;

@@ -21,7 +21,7 @@ public class StockTicker {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	public int id;
+	public Long id;
 	
 	@Column(name="date", nullable = false)
 	public LocalDateTime date;

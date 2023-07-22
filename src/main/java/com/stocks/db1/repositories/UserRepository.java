@@ -1,12 +1,10 @@
 package com.stocks.db1.repositories;
 
-import java.util.List;
 import java.util.Set;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.stocks.db1.entities.ContestDetails;
 import com.stocks.db1.entities.User;

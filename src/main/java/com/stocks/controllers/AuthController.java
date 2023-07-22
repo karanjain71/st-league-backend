@@ -69,7 +69,6 @@ public class AuthController {
 	private void authenticate(String username, String password) throws Exception {
 		
 		UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(username, password);
-		
 		try {
 			this.authenticationManager.authenticate(authenticationToken);
 		}
@@ -77,7 +76,6 @@ public class AuthController {
 			System.out.println("Invalid Details Entered!");
 			throw new Exception("Invalid username or password !");
 		}
-		
 	}
 	
 	@PostMapping("/signup")
