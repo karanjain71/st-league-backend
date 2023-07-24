@@ -114,7 +114,7 @@ public class ContestServiceImpl implements ContestService{
 	public List<Object[]> setWinners(ContestDetails contest) {
 		List<Object[]> resList = new ArrayList<>();
 		
-		Map<Integer, Integer> winningAmt = contest.getWinningPrize();
+		Map<Integer, Integer> winningAmt = null;
 		List<Integer> ranks = new ArrayList<>(winningAmt.keySet());
 		int rankSize = ranks.size();
 		

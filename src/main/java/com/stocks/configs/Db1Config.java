@@ -25,9 +25,9 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @Configuration
 @EnableTransactionManagement
 @EnableJpaRepositories(
-    basePackages = "com.stocks.db1.repositories", 
-    entityManagerFactoryRef = "entityManagerFactory1",
-    transactionManagerRef = "transactionManager1"
+    basePackages = "com.stocks.db1.repositories"
+//    entityManagerFactoryRef = "entityManagerFactory1",
+//    transactionManagerRef = "transactionManager1"
 
 )
 public class Db1Config {
@@ -35,34 +35,35 @@ public class Db1Config {
 	@Autowired
     private Environment env;
     
-    @Bean
-    @Primary
-    public LocalContainerEntityManagerFactoryBean entityManagerFactory1() {
-        LocalContainerEntityManagerFactoryBean em
-          = new LocalContainerEntityManagerFactoryBean();
-        em.setDataSource(dataSource1());
-        em.setPackagesToScan(
-          new String[] { "com.stocks.db1.entities" });
-
-        HibernateJpaVendorAdapter vendorAdapter
-          = new HibernateJpaVendorAdapter();
-        em.setJpaVendorAdapter(vendorAdapter);
-        HashMap<String, Object> properties = new HashMap<>();
-        properties.put("hibernate.hbm2ddl.auto",
-          env.getProperty("hibernate.hbm2ddl.auto"));
-        properties.put("hibernate.dialect",
-          env.getProperty("hibernate.dialect"));
-        em.setJpaPropertyMap(properties);
-
-        return em;
-    }
+//    @Bean
+//    @Primary
+//    public LocalContainerEntityManagerFactoryBean entityManagerFactory1() {
+//    	
+//    	System.out.println("DB1 ENTITY MANAGER");
+//        LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
+//        em.setDataSource(dataSource1());
+//        em.setPackagesToScan(
+//          new String[] { "com.stocks.db1.entities" });
+//
+//        HibernateJpaVendorAdapter vendorAdapter
+//          = new HibernateJpaVendorAdapter();
+//        em.setJpaVendorAdapter(vendorAdapter);
+//        HashMap<String, Object> properties = new HashMap<>();
+//        properties.put("hibernate.hbm2ddl.auto",
+//          env.getProperty("hibernate.hbm2ddl.auto"));
+//        properties.put("hibernate.dialect",
+//          env.getProperty("hibernate.dialect"));
+//        em.setJpaPropertyMap(properties);
+//
+//        return em;
+//    }
 
     @Primary
     @Bean
     public DataSource dataSource1() {
  
-        DriverManagerDataSource dataSource
-          = new DriverManagerDataSource();
+    	System.out.println("DB1 DATA SOURCE");
+        DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName(
           env.getProperty("jdbc.driverClassName"));
         dataSource.setUrl(env.getProperty("spring.db1.datasource.url"));
@@ -72,41 +73,15 @@ public class Db1Config {
         return dataSource;
     }
 
-    @Primary
-    @Bean
-    public PlatformTransactionManager transactionManager1() {
- 
-        JpaTransactionManager transactionManager
-          = new JpaTransactionManager();
-        transactionManager.setEntityManagerFactory(
-        		entityManagerFactory1().getObject());
-        return transactionManager;
-    }
-//	@Primary
-//    @Bean(name = "dataSource1")
-//	@ConfigurationProperties(prefix = "spring.db1.datasource")
-//    public DataSource dataSource() {
-//        return DataSourceBuilder.create().build();
+//    @Primary
+//    @Bean
+//    public PlatformTransactionManager transactionManager1() {
+// 
+//    	System.out.println("DB1 TRANSACTION MANAGER");
+//        JpaTransactionManager transactionManager = new JpaTransactionManager();
+//        transactionManager.setEntityManagerFactory(
+//        		entityManagerFactory1().getObject());
+//        return transactionManager;
 //    }
-//	
-//	@Primary
-//    @Bean(name = "entityManagerFactory1")
-//	public LocalContainerEntityManagerFactoryBean entityManagerFactory(EntityManagerFactoryBuilder builder,
-//			@Qualifier("dataSource1") DataSource dataSource) {
-//        HashMap<String, Object>properties = new HashMap<>();
-//        properties.put("hibernate.hbm2ddl.auto", "update");
-//
-//        return builder.dataSource(dataSource)
-//        		.properties(properties)
-//        		.packages("com.stocks.db1.entities")
-//        		.persistenceUnit("db1")
-//        		.build();
-//    }
-//	
-//	@Primary
-//    @Bean(name = "transactionManager1")
-//    public PlatformTransactionManager transactionManager(@Qualifier("entityManagerFactory1") EntityManagerFactory entityManagerFactory) {
-//        return new JpaTransactionManager(entityManagerFactory);
-//        
-//    }
+
 }
